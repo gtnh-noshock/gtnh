@@ -46,6 +46,6 @@ end
 
 
 
-local ob = getComponent("weather_obelisk");
+local ob = getComponent("weather_obelisk", "4b6");
 print(ob);
 printTable(ob);
