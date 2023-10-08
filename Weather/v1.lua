@@ -1,51 +1,15 @@
 local os = require("os");
-local component = require("component");
-
-
-local function startsWith(text, prefix)
-    return text:find(prefix, 1, true) == 1
-end
-
-local function printTable(table)
-    if table == nil then
-        print("nil table")
-        return
+local component = require("component")
+local sides = require("sides")
+local redstone = component.redstone
+local ob = component.weather_obelisk;
+local storm = ob.weather_modes.storm;
+ 
+while true do
+    x = redstone.getInput(sides.east); -- 这条用来读取红石信号，请使用红石 I/O 端口 (Redstone I/O)来接收信号，其中（sides.east)的east是接收红石信号的方向，根据你的布局自行更改
+    if ob.canActivate(storm) and x > 0 then
+      ob.activate();
     end
-    if isNullOrEmpty(table) then
-        print("empty table")
-        return
-    end
-    for k, v in pairs(table) do
-        print(k, v)
-    end
-end
----
--- Returns the component only if the type and name prefixes match only one in the network
----
-local function getComponent(type, idPrefix)
-    -- Get component
-    local matched = 0
-    local matchedK = nil
-    local matchedV = nil
-    for k, v in pairs(component.list(t)) do
-        if startsWith(k, idPrefix) then
-            matchedK = k
-            matchedV = v
-            matched = matched + 1
-        end
-    end
-    if matched == 1 then
-        return component.proxy(matchedK, matchedV)
-    end
-    if matched > 1 then
-        error("duplicate match for " .. type .. " with prefix " .. idPrefix)
-    else
-        error("no match for " .. type .. " with prefix " .. idPrefix)
-    end
-end
-
-
-
-local ob = getComponent("weather_obelisk", "6ea");
-print(ob);
-printTable(ob);
+    
+    os.sleep(30); -- 每30s检测一次，数字可以自行更改，但是不推荐太低，会导致方尖碑二连发
+  end
