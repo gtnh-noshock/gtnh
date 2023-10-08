@@ -6,6 +6,14 @@ local invetory = 1
 local b = 200  --总共向上放置格数,按照避雷针最高处减去最低处的Y坐标获得
 local invS = {}
 local invN = 1  --机器人初始选择的物品栏格子
+
+local function moveUp()
+    success, failure = robot.up()
+    if not success then
+        print(failure)
+    end
+end
+
 while true do
     --按照“几”字形移动并放置方块
     robot.select(invN)
@@ -30,11 +38,9 @@ while true do
                 robot.select(invetory + 1)   --选择下一格物品栏
                 invetory = invetory + 1
                 robot.place()   --继续用新的格子放置方块
-                robot.up()
-            else
-                --前方没有方块则向上移动
-                robot.up()
             end
+            --前方没有方块则向上移动
+            moveUp()
         end
     end
     --robot.turnRight()
