@@ -12,8 +12,7 @@ wget https://gtnh-noshock.github.io/gtnh/Weather/v1.lua
 robot
 
 ```shell
-wget https://gtnh-noshock.github.io/gtnh/Weather/robot.lua
-./robot.lua
+rm ./robot.lua && wget https://gtnh-noshock.github.io/gtnh/Weather/robot.lua && ./robot.lua
 ```
 
 v1
