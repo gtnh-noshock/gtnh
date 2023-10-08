@@ -3,7 +3,7 @@ local robot = require("robot")
 local a = 0
 local invC = {}
 local invetory = 1
-local b = 100  --总共向上放置格数,按照避雷针最高处减去最低处的Y坐标获得
+local b = 15  --总共向上放置格数,按照避雷针最高处减去最低处的Y坐标获得
 local invS = {}
 local invN = 1  --机器人初始选择的物品栏格子
 
