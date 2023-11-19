@@ -6,6 +6,8 @@ local enable = component.redstone
 local ob = component.weather_obelisk;
 local storm = ob.weather_modes.storm;
 
+print("start")
+
 while true do
     -- 这条用来读取红石信号，请使用红石 I/O 端口 (Redstone I/O)来接收信号，其中（sides.east)的east是接收红石信号的方向，根据你的布局自行更改
     x = enable.getInput(sides.east);
