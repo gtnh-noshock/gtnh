@@ -7,8 +7,10 @@ local n = 0
 
 -- 输出仓的方位
 local side_output_hatch = sides.down
-local side_buffer = sides.up -- 此处为想要输出给的缓存器的方位(比如超级缸等)
-local fluid_ratio = 0.5 -- 此处为控制输出仓中流体的比例, 通常为0.5
+-- 此处为想要输出给的缓存器的方位(比如超级缸等)
+local side_buffer = sides.up
+-- 此处为控制输出仓中流体的比例, 通常为0.5
+local fluid_ratio = 0.5
 
 -- 获取所有的转运器
 for address, componentType in component.list() do
@@ -37,6 +39,6 @@ while (true) do
             end
         end
     end
-    -- 每次转运后延迟1t,如果觉得转运速度不够快可以尝试删除
+    -- 每次转运后延迟1t
     os.sleep(0.05)
 end
