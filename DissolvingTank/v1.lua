@@ -30,25 +30,19 @@ while (true) do
         print("BYE!")
         break
     end
-    for i, trans in pairs(all) do
-        print(i)
+    for _, trans in pairs(all) do
         local current = trans.getFluidInTank(output)
-        print("current: ", current)
-        print("current[1]: ", current[1])
-        print("current[1].amount: ", current[1].amount)
         if (
                 current ~= nil
                         and current[1] ~= nil
-                        and current[1].amount > current[1].capacity * fluid_ratio
+                        and current[1].amount < current[1].capacity * fluid_ratio
         ) then
-            local fluid_count = current[1].amount - current[1].capacity * fluid_ratio
+            local fluid_count = current[1].capacity * fluid_ratio - current[1].amount
             if (trans.transferFluid(input, output, fluid_count)) then
                 print("transferred ", fluid_count, " mb fluid")
             else
                 print("transfer fluid failed , address: ", trans.address)
             end
-        else
-            print("skip: ", trans.address)
         end
     end
     -- 每次转运后延迟1t
