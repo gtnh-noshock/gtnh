@@ -24,6 +24,7 @@ end
 -- 无限循环,如果想新加入转运器的话直接加入转运器,随后关机再启动程序即可
 while (true) do
     for _, trans in pairs(all) do
+        print(trans)
         local current_fluids = trans.getFluidInTank(output)
         if (
                 current_fluids ~= nil
