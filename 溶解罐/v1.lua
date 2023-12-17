@@ -1,6 +1,7 @@
-component = require("component")
-os = require("os")
-sides = require("sides")
+local component = require("component")
+local os = require("os")
+local sides = require("sides")
+local event = require("event")
 
 local all = {}
 local n = 0
@@ -22,9 +23,16 @@ for address, componentType in component.list() do
 end
 
 -- 无限循环,如果想新加入转运器的话直接加入转运器,随后关机再启动程序即可
+local keyDown
 while (true) do
-    for _, trans in pairs(all) do
-        print(trans)
+    _, _, keyDown = event.pull(1, "key_down")
+    if keyDown then
+        colorPrint(RED, "BYE!")
+        disableReactor()
+        break
+    end
+    for i, trans in pairs(all) do
+        print(i)
         local current_fluids = trans.getFluidInTank(output)
         if (
                 current_fluids ~= nil
