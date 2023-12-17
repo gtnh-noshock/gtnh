@@ -33,6 +33,9 @@ while (true) do
     for i, trans in pairs(all) do
         print(i)
         local current = trans.getFluidInTank(output)
+        print("current: ", current)
+        print("current[1]: ", current[1])
+        print("current[1].amount: ", current[1].amount)
         if (
                 current ~= nil
                         and current[1] ~= nil
