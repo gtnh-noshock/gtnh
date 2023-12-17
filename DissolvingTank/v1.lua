@@ -37,7 +37,7 @@ while (true) do
                         and current[1] ~= nil
                         and current[1].amount < fluid_target
         ) then
-            local fluid_count = current[1].capacity * fluid_ratio - current[1].amount
+            local fluid_count = fluid_target - current[1].amount
             if (trans.transferFluid(input, output, fluid_count)) then
                 print("transferred ", fluid_count, " mb fluid")
             else
