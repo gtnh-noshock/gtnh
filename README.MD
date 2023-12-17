@@ -24,11 +24,11 @@ rm v1.lua && wget https://gtnh-noshock.github.io/gtnh/Weather/v1.lua && ./v1.lua
 ## 细菌培养缸
 
 ```shell
-rm v1.lua && wget https://gtnh-noshock.github.io/gtnh/%E7%BB%86%E8%8F%8C%E5%9F%B9%E5%85%BB%E7%BC%B8/v1.lua && ./v1.lua
+rm v1.lua && wget https://gtnh-noshock.github.io/gtnh/BackteriaCultureTank/v1.lua && ./v1.lua
 ```
 
 ## 溶解罐
 
 ```shell
-rm v1.lua && wget https://gtnh-noshock.github.io/gtnh/%E6%BA%B6%E8%A7%A3%E7%BD%90/v1.lua && ./v1.lua
+rm v1.lua && wget https://gtnh-noshock.github.io/gtnh/DissolvingTank/v1.lua && ./v1.lua
 ```
