@@ -10,8 +10,8 @@ local n = 0
 local input = sides.down
 -- 输出
 local output = sides.up
--- 输出容器中流体的比例, 通常为0.5
-local fluid_ratio = 0.5
+-- 输出容器中流体的目标量
+local fluid_target = 640000
 
 -- 获取所有的转运器
 for address, componentType in component.list() do
@@ -35,7 +35,7 @@ while (true) do
         if (
                 current ~= nil
                         and current[1] ~= nil
-                        and current[1].amount < current[1].capacity * fluid_ratio
+                        and current[1].amount < fluid_target
         ) then
             local fluid_count = current[1].capacity * fluid_ratio - current[1].amount
             if (trans.transferFluid(input, output, fluid_count)) then
