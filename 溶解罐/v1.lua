@@ -27,24 +27,25 @@ local keyDown
 while (true) do
     _, _, keyDown = event.pull(1, "key_down")
     if keyDown then
-        colorPrint(RED, "BYE!")
-        disableReactor()
+        print("BYE!")
         break
     end
     for i, trans in pairs(all) do
         print(i)
-        local current_fluids = trans.getFluidInTank(output)
+        local current = trans.getFluidInTank(output)
         if (
-                current_fluids ~= nil
-                        and current_fluids[1] ~= nil
-                        and current_fluids[1].amount > current_fluids[1].capacity * fluid_ratio
+                current ~= nil
+                        and current[1] ~= nil
+                        and current[1].amount > current[1].capacity * fluid_ratio
         ) then
-            local fluid_count = current_fluids[1].amount - current_fluids[1].capacity * fluid_ratio
+            local fluid_count = current[1].amount - current[1].capacity * fluid_ratio
             if (trans.transferFluid(input, output, fluid_count)) then
                 print("transferred ", fluid_count, " mb fluid")
             else
                 print("transfer fluid failed , address: ", trans.address)
             end
+        else
+            print("skip: ", trans.address)
         end
     end
     -- 每次转运后延迟1t

@@ -27,8 +27,7 @@ local keyDown
 while (true) do
     _, _, keyDown = event.pull(1, "key_down")
     if keyDown then
-        colorPrint(RED, "BYE!")
-        disableReactor()
+        print("BYE!")
         break
     end
     for _, trans in pairs(all) do
