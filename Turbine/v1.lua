@@ -11,7 +11,7 @@ local input = sides.up
 -- 输出
 local output = sides.down
 -- 输出容器中流体的目标量 锡等离子体 254/s
-local fluid_target = 254
+local fluid_target = 254 * 16
 
 -- 获取所有的转运器
 for address, componentType in component.list() do
