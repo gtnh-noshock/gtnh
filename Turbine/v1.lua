@@ -68,5 +68,5 @@ while (true) do
         end
     end
     -- 每次转运后延迟1s
-    os.sleep(1)
+    os.sleep(0.75)
 end
