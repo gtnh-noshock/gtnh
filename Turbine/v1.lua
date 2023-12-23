@@ -10,8 +10,27 @@ local n = 0
 local input = sides.up
 -- 输出
 local output = sides.down
--- 输出容器中流体的目标量 锡等离子体 254/s
-local fluid_target = 254 * 16
+-- 输出容器中流体的目标量
+local fluid_target
+
+-- 获取命令行参数
+local args = { ... }
+-- 检查是否至少有一个参数
+if #args >= 1 then
+    -- 将第一个参数转换为数字类型
+    fluid_target = tonumber(args[1])
+
+    -- 检查转换是否成功
+    if fluid_target then
+        print("设定流体目标: " .. fluid_target)
+    else
+        print("无法将第一个参数 `" .. args[1] .. "` 转换为数字")
+        exit(0)
+    end
+else
+    print("未提供流体目标")
+    exit(0)
+end
 
 -- 获取所有的转运器
 for address, componentType in component.list() do
@@ -22,7 +41,7 @@ for address, componentType in component.list() do
     end
 end
 
--- 无限循环,如果想新加入转运器的话直接加入转运器,随后关机再启动程序即可
+-- 无限循环, 如果想新加入转运器的话直接加入转运器, 随后关机再启动程序即可
 local ascii
 while (true) do
     _, _, ascii = event.pull(1, "key_down")
