@@ -464,8 +464,8 @@ while true do
         return
     end
 
-    local key = keyDown(1) -- capture key
-    if key == 115 then
+    local ascii = keyDown(1) -- capture key
+    if ascii == 115 then
         colorPrint(RED, "BYE!")
         disableReactor()
         break ;

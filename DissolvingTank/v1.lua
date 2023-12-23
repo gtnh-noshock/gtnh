@@ -23,10 +23,10 @@ for address, componentType in component.list() do
 end
 
 -- 无限循环,如果想新加入转运器的话直接加入转运器,随后关机再启动程序即可
-local keyDown
+local ascii
 while (true) do
-    _, _, keyDown = event.pull(1, "key_down")
-    if keyDown then
+    _, _, ascii = event.pull(1, "key_down")
+    if ascii == 115 then
         print("BYE!")
         break
     end
