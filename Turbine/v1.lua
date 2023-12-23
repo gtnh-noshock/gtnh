@@ -37,7 +37,7 @@ if #args >= 2 then
         exit(0)
     end
 else
-    print("未提供流体目标")
+    print("参数错误, ./v1.lua <流体目标> <运行延迟>")
     exit(0)
 end
 
