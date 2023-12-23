@@ -12,19 +12,28 @@ local input = sides.up
 local output = sides.down
 -- 输出容器中流体的目标量
 local fluid_target
+-- delay
+local delay_millis
 
 -- 获取命令行参数
 local args = { ... }
 -- 检查是否至少有一个参数
-if #args >= 1 then
+if #args >= 2 then
     -- 将第一个参数转换为数字类型
     fluid_target = tonumber(args[1])
+    delay_millis = tonumber(args[2])
 
     -- 检查转换是否成功
     if fluid_target then
         print("设定流体目标: " .. fluid_target)
     else
         print("无法将第一个参数 `" .. args[1] .. "` 转换为数字")
+        exit(0)
+    end
+    if delay_millis then
+        print("设定运行延迟: " .. delay_millis)
+    else
+        print("无法将第二个参数 `" .. args[2] .. "` 转换为数字")
         exit(0)
     end
 else
@@ -67,6 +76,8 @@ while (true) do
             end
         end
     end
-    -- 每次转运后延迟1tick
-    os.sleep(0.01)
+    -- 每次转运后延迟
+    if delay_millis > 0 then
+        os.sleep(delay_millis)
+    end
 end
