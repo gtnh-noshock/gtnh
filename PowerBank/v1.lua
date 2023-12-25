@@ -37,9 +37,17 @@ end
 -- END OF UTILITIES
 
 -- inputs
-local redstoneEnergy20 = getComponent("redstone", "741")
-local redstoneEnergy50 = getComponent("redstone", "ce8")
-local redstoneEnergy95 = getComponent("redstone", "9f6")
+
+local args = { ... }
+-- 检查是否至少有一个参数
+if #args < 3 then
+    print("参数错误, ./v1.lua <redstoneEnergy20> <redstoneEnergy50> <redstoneEnergy95>")
+    exit(0)
+end
+
+local redstoneEnergy20 = getComponent("redstone", args[1])
+local redstoneEnergy50 = getComponent("redstone", args[2])
+local redstoneEnergy95 = getComponent("redstone", args[3])
 
 -- outputs
 local redstoneStartTurbine = getComponent("redstone", "5df")
@@ -91,7 +99,6 @@ local function updateRedstoneOutputs()
     end
 end
 
--- 无限循环,如果想新加入转运器的话直接加入转运器,随后关机再启动程序即可
 local ascii
 while (true) do
     -- check exit
