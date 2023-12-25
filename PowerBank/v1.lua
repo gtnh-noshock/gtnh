@@ -4,6 +4,7 @@ local filesystem = require("filesystem")
 local serialization = require("serialization")
 local term = require("term")
 local coroutine = require("coroutine")
+local sides = require("sides")
 
 local function startsWith(text, prefix)
     return text:find(prefix, 1, true) == 1
