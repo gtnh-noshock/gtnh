@@ -62,26 +62,45 @@ local States = {
 
 local state = 0
 
+local function getTime()
+    local time = os.time() -- 获取当前的时间戳
+    local formattedTime = os.date("%Y-%m-%d %H:%M:%S", time) -- 将时间戳格式化为可读的格式
+    return formattedTime
+end
+
+local function log(message)
+    print(getTime() .. " " .. message)
+end
+
 local function setState(newState)
     if state ~= newState then
         state = newState
-        print("State: " .. newState)
+        return true
     end
+    return false
 end
 
 local function updateState()
     if redstoneEnergy20.getInput(sides.up) == 0 then
-        setState(States.LOW)
+        if setState(States.LOW) then
+            log("LOW")
+        end
         return
     end
 
     if redstoneEnergy95.getInput(sides.up) > 0 then
         setState(States.FULL)
+        if setState(States.FULL) then
+            log("FULL")
+        end
         return
     end
 
     if redstoneEnergy50.getInput(sides.up) == 0 then
         setState(States.TURBINE_CHARGING)
+        if setState(States.TURBINE_CHARGING) then
+            log("TURBINE_CHARGING")
+        end
         return
     end
 end
