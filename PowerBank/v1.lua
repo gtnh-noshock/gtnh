@@ -94,9 +94,11 @@ local function updateRedstoneOutputs()
     elseif state == States.FULL then
         redstoneStartTurbine.setOutput(sides.up, 0)
     end
-    
+
     if redstoneEnergy20.getInput(sides.up) > 0 then
         redstoneStartBlastFurnace.setOutput(sides.up, 15)
+    else
+        redstoneStartBlastFurnace.setOutput(sides.up, 0)
     end
 end
 
