@@ -32,6 +32,8 @@ while (true) do
         print(trans)
         print(input)
         print(output)
+        print(trans.isPresent(input))
+        print(trans.isPresent(output))
         if trans.isPresent(input) and trans.isPresent(output) then
             local origin = trans.getStackInSlot(input, 0)
             local current = trans.getStackInSlot(output, 0)
