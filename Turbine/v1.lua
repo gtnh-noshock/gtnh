@@ -30,15 +30,15 @@ while (true) do
     end
     for _, trans in pairs(all) do
         if trans.getInventoryName(input) ~= nil and trans.getInventoryName(output) ~= nil then
-            local origin = trans.getStackInSlot(input, 0)
-            local current = trans.getStackInSlot(output, 0)
-            if (current ~= nil
-                    and origin ~= nil
-                    and current.name == "minecraft:air"
-                    and origin.size >= 1
+            local getItem = trans.getStackInSlot(input, 1)
+            local putItem = trans.getStackInSlot(output, 1)
+            if (putItem ~= nil
+                    and getItem ~= nil
+                    and putItem.name == "minecraft:air"
+                    and getItem.size >= 1
             ) then
                 if (trans.transferItem(input, output, 1)) then
-                    print("transferred " .. 1 .. " " .. origin.name)
+                    print("transferred " .. 1 .. " " .. getItem.name)
                 else
                     print("transfer item failed, address: ", trans.address)
                 end
