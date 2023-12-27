@@ -29,17 +29,19 @@ while (true) do
         break
     end
     for _, trans in pairs(all) do
-        local origin = trans.getStackInSlot(input, 0)
-        local current = trans.getStackInSlot(output, 0)
-        if (current ~= nil
-                and origin ~= nil
-                and current.name == "minecraft:air"
-                and origin.size >= 1
-        ) then
-            if (trans.transferItem(input, output, 1)) then
-                print("transferred " .. 1 .. " " .. origin.name)
-            else
-                print("transfer item failed, address: ", trans.address)
+        if trans.isPresent(input) and trans.isPresent(output) then
+            local origin = trans.getStackInSlot(input, 0)
+            local current = trans.getStackInSlot(output, 0)
+            if (current ~= nil
+                    and origin ~= nil
+                    and current.name == "minecraft:air"
+                    and origin.size >= 1
+            ) then
+                if (trans.transferItem(input, output, 1)) then
+                    print("transferred " .. 1 .. " " .. origin.name)
+                else
+                    print("transfer item failed, address: ", trans.address)
+                end
             end
         end
     end
