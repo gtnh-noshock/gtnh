@@ -22,7 +22,7 @@ rm v1.lua && wget http://e404.top:1111/DissolvingTank/v1.lua && ./v1.lua
 ## 涡轮
 
 ```shell
-rm v1.lua && wget http://e404.top:1111/Turbine/v1.lua && ./v1.lua 253
+rm v1.lua && wget http://e404.top:1111/Turbine/v1.lua && ./v1.lua
 ```
 
 ## 能源站
