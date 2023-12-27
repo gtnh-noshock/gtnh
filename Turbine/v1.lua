@@ -29,6 +29,9 @@ while (true) do
         break
     end
     for _, trans in pairs(all) do
+        print(trans)
+        print(input)
+        print(output)
         if trans.isPresent(input) and trans.isPresent(output) then
             local origin = trans.getStackInSlot(input, 0)
             local current = trans.getStackInSlot(output, 0)
