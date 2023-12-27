@@ -32,9 +32,8 @@ while (true) do
         if trans.getInventoryName(input) ~= nil and trans.getInventoryName(output) ~= nil then
             local getItem = trans.getStackInSlot(input, 1)
             local putItem = trans.getStackInSlot(output, 1)
-            if (putItem ~= nil
+            if (putItem == nil
                     and getItem ~= nil
-                    and putItem.name == "minecraft:air"
                     and getItem.size >= 1
             ) then
                 if (trans.transferItem(input, output, 1)) then
