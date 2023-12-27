@@ -37,9 +37,9 @@ while (true) do
                     and getItem.size >= 1
             ) then
                 if (trans.transferItem(input, output, 1)) then
-                    print("transferred " .. 1 .. " " .. getItem.name)
+                    print("transferred")
                 else
-                    print("transfer item failed, address: ", trans.address)
+                    print("transfer failed, address: ", trans.address)
                 end
             end
         end
