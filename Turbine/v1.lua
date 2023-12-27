@@ -7,39 +7,9 @@ local all = {}
 local n = 0
 
 -- 输入
-local input = sides.up
+local input = sides.down
 -- 输出
-local output = sides.down
--- 输出容器中流体的目标量
-local fluid_target
--- delay
-local delay_millis
-
--- 获取命令行参数
-local args = { ... }
--- 检查是否至少有一个参数
-if #args >= 2 then
-    -- 将第一个参数转换为数字类型
-    fluid_target = tonumber(args[1])
-    delay_millis = tonumber(args[2])
-
-    -- 检查转换是否成功
-    if fluid_target then
-        print("设定流体目标: " .. fluid_target)
-    else
-        print("无法将第一个参数 `" .. args[1] .. "` 转换为数字")
-        exit(0)
-    end
-    if delay_millis then
-        print("设定运行延迟: " .. delay_millis)
-    else
-        print("无法将第二个参数 `" .. args[2] .. "` 转换为数字")
-        exit(0)
-    end
-else
-    print("参数错误, ./v1.lua <流体目标> <运行延迟>")
-    exit(0)
-end
+local output = sides.up
 
 -- 获取所有的转运器
 for address, componentType in component.list() do
@@ -59,25 +29,20 @@ while (true) do
         break
     end
     for _, trans in pairs(all) do
-        local origin = trans.getFluidInTank(input)
-        local current = trans.getFluidInTank(output)
+        local origin = trans.getStackInSlot(input, 0)
+        local current = trans.getStackInSlot(output, 0)
         if (current ~= nil
                 and origin ~= nil
-                and current[1] ~= nil
-                and origin[1] ~= nil
-                and current[1].amount < fluid_target
-                and origin[1].amount > fluid_target
+                and current.name == "minecraft:air"
+                and origin.size >= 1
         ) then
-            local fluid_count = fluid_target - current[1].amount
-            if (trans.transferFluid(input, output, fluid_count)) then
-                print("transferred ", fluid_count, " mb fluid")
+            if (trans.transferItem(input, output, 1)) then
+                print("transferred " .. 1 .. " " .. origin.name)
             else
-                print("transfer fluid failed, address: ", trans.address)
+                print("transfer item failed, address: ", trans.address)
             end
         end
     end
     -- 每次转运后延迟
-    if delay_millis > 0 then
-        os.sleep(delay_millis)
-    end
+    os.sleep(1)
 end
