@@ -29,12 +29,7 @@ while (true) do
         break
     end
     for _, trans in pairs(all) do
-        print(trans)
-        print(input)
-        print(output)
-        print(trans.isPresent(input))
-        print(trans.isPresent(output))
-        if trans.isPresent(input) and trans.isPresent(output) then
+        if trans.getInventoryName(input) ~= nil and trans.getInventoryName(output) ~= nil then
             local origin = trans.getStackInSlot(input, 0)
             local current = trans.getStackInSlot(output, 0)
             if (current ~= nil
