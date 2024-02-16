@@ -9,40 +9,55 @@ import java.time.Duration
 import java.time.LocalDateTime
 import java.time.ZoneOffset
 import java.time.format.DateTimeFormatter
-import kotlin.system.exitProcess
 
 // 保留3小时内所有
 // 3小时-7天 一小时一个
 // 删除超过7天的
 val backupDir = File("/hdd/user_backup/gtnh/backups")
-val backups: Array<File> = backupDir.listFiles() ?: exitProcess(0)
 val formatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd-HH-mm-ss")
 val printFormatter: DateTimeFormatter = DateTimeFormatter.ofPattern("yyyy.MM.dd HH:mm:ss")
+println("开始存档备份")
+
+fun File.size() = String.format("%.2f", this.length() / 1024.0 / 1024.0 / 1024.0)
 
 runBlocking(Dispatchers.IO) {
     while (true) {
         launch {
-            println("服务器存档备份")
             Runtime.getRuntime().exec("tmux send-keys -t gtnh:0 save-all C-m").waitFor()
-            Thread.sleep(3000)
+            Thread.sleep(1000)
             val dirName = formatter.format(LocalDateTime.now())
             File(dirName).mkdir()
             val fileName = "$dirName/backup.zip"
             println("开始备份: $fileName")
             launch {
-                Runtime.getRuntime().exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say 开始备份: $fileName", "C-m")).waitFor()
+                Runtime.getRuntime()
+                    .exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say 开始备份: $fileName", "C-m"))
+                    .waitFor()
             }
             launch {
-                Runtime.getRuntime().exec("zip -qr $fileName ../World").waitFor()
-                println("完成备份: $fileName")
-                Runtime.getRuntime().exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say 完成备份: $fileName", "C-m")).waitFor()
+                val t = System.currentTimeMillis()
+                val exec = Runtime.getRuntime().exec("zip -qr $fileName /home/gtnh/gtnh-2.5.0/World")
+                if (exec.waitFor() != 0) {
+                    println("[WARN] ${exec.inputStream.bufferedReader().use { it.readText() }}")
+                    println("备份时出现异常: $fileName")
+                    Runtime.getRuntime()
+                        .exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say 备份时出现异常: $fileName", "C-m"))
+                        .waitFor()
+                } else {
+                    val now = System.currentTimeMillis()
+                    println("完成备份: $fileName 耗时${now - t}ms")
+                    Runtime.getRuntime()
+                        .exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say 完成备份: $fileName 耗时${now - t}ms 备份${File(fileName).size()}", "C-m"))
+                        .waitFor()
+                }
             }
-
+        }
+        launch {
             val now: LocalDateTime = LocalDateTime.now()
             println("开始检查过期备份")
             val preHour = mutableMapOf<String, String>()
             var delete = 0
-            backups.filter {
+            backupDir.listFiles()!!.filter {
                 it.isDirectory
             }.map {
                 it to LocalDateTime.parse(it.name, formatter)
@@ -73,12 +88,14 @@ runBlocking(Dispatchers.IO) {
                 delete++
                 println("删除${dateTime.format(printFormatter)}: 7天前")
             }
-            launch {
-                Runtime.getRuntime().exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say 完成检查过期备份 共删除$delete", "C-m")).waitFor()
+            if (delete != 0) launch {
+                Runtime.getRuntime()
+                    .exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say 共删除过期备份 $delete 个", "C-m"))
+                    .waitFor()
             }
             println("完成检查过期备份 共删除$delete")
-            println()
         }
         delay(5 * 60 * 1000)
+        println()
     }
 }
