@@ -45,9 +45,22 @@ runBlocking(Dispatchers.IO) {
                         .waitFor()
                 } else {
                     val now = System.currentTimeMillis()
-                    println("完成备份: $fileName 耗时${now - t}ms")
+                    val time = String.format("%.1f", (now - t) / 1000.0)
+                    val size = File(fileName).size()
+                    val message = "完成备份: $fileName 耗时${time}s 备份大小${size}G"
+                    println(message)
                     Runtime.getRuntime()
-                        .exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say 完成备份: $fileName 耗时${now - t}ms 备份大小${File(fileName).size()}G", "C-m"))
+                        .exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say $message", "C-m"))
+                        .waitFor()
+                    val space = backupDir.listFiles()
+                        .filter(File::isDirectory)
+                        .map { it.resolve("backup.zip") }
+                        .filter(File::exists)
+                        .sumOf { it.length() }
+                        .let { String.format("当前所有备份共%.2fG", it / 1024.0 / 1024.0 / 1024.0) }
+                    println(space)
+                    Runtime.getRuntime()
+                        .exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say $space", "C-m"))
                         .waitFor()
                 }
             }
