@@ -47,7 +47,7 @@ runBlocking(Dispatchers.IO) {
                     val now = System.currentTimeMillis()
                     println("完成备份: $fileName 耗时${now - t}ms")
                     Runtime.getRuntime()
-                        .exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say 完成备份: $fileName 耗时${now - t}ms 备份${File(fileName).size()}", "C-m"))
+                        .exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say 完成备份: $fileName 耗时${now - t}ms 备份大小${File(fileName).size()}G", "C-m"))
                         .waitFor()
                 }
             }
