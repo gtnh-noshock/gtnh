@@ -69,6 +69,7 @@ runBlocking(Dispatchers.IO) {
             val now: LocalDateTime = LocalDateTime.now()
             println("开始检查过期备份")
             val preHour = mutableMapOf<String, String>()
+            val preDay = mutableMapOf<String, String>()
             var delete = 0
             backupDir.listFiles()!!.filter {
                 it.isDirectory
@@ -81,8 +82,8 @@ runBlocking(Dispatchers.IO) {
                 // 保留最近 3 小时内的备份
                 if (hoursDiff <= 3) return@forEach
 
-                // 保留 3小时-7天 每小时的第一个备份
-                if (hoursDiff <= 168) {
+                // 保留 3小时-1天 每小时的第一个备份
+                if (hoursDiff <= 24) {
                     val hourKey = "${dateTime.year}-${dateTime.monthValue}-${dateTime.dayOfMonth}-${dateTime.hour}"
                     // 保留每小时的第一份
                     val exists = preHour[hourKey]
@@ -93,6 +94,21 @@ runBlocking(Dispatchers.IO) {
                     file.deleteRecursively()
                     delete++
                     println("删除${dateTime.format(printFormatter)}: 已有当前小时的备份${exists}")
+                    return@forEach
+                }
+
+                // 保留 1天-7天 每天的第一个备份
+                if (hoursDiff <= 168) {
+                    val dayKey = "${dateTime.year}-${dateTime.monthValue}-${dateTime.dayOfMonth}"
+                    // 保留每小时的第一份
+                    val exists = preDay[dayKey]
+                    if (exists == null) {
+                        preDay[dayKey] = dateTime.format(printFormatter)
+                        return@forEach
+                    }
+                    file.deleteRecursively()
+                    delete++
+                    println("删除${dateTime.format(printFormatter)}: 已有当天的备份${exists}")
                     return@forEach
                 }
 
