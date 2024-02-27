@@ -36,7 +36,7 @@ runBlocking(Dispatchers.IO) {
             }
             launch {
                 val t = System.currentTimeMillis()
-                val exec = Runtime.getRuntime().exec("zip -qr $fileName /home/gtnh/gtnh-2.5.0/World")
+                val exec = Runtime.getRuntime().exec("./backup.sh", null, File("/home/gtnh/gtnh-2.5.0"))
                 if (exec.waitFor() != 0) {
                     println("[WARN] ${exec.inputStream.bufferedReader().use { it.readText() }}")
                     println("备份时出现异常: $fileName")
@@ -44,9 +44,10 @@ runBlocking(Dispatchers.IO) {
                         .exec(arrayOf("tmux", "send-keys", "-t", "gtnh:0", "say 备份时出现异常: $fileName", "C-m"))
                         .waitFor()
                 } else {
+                    Runtime.getRuntime().exec("mv backup.zip backups/$fileName", null, File("/home/gtnh/gtnh-2.5.0"))
                     val now = System.currentTimeMillis()
                     val time = String.format("%.1f", (now - t) / 1000.0)
-                    val size = File(fileName).size()
+                    val size = File("backups/$fileName").size()
                     val message = "完成备份: $fileName 耗时${time}s 备份大小${size}G"
                     println(message)
                     Runtime.getRuntime()
