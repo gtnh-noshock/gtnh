@@ -236,7 +236,7 @@ local function update()
                 if startsWith(item.name, "gregtech:gt.mateitem.01") then
                     hasMaterial = true
                 end
-                if startsWith(item.name, "barriespp:Modifier") then
+                if startsWith(item.name, "berriespp:Modifier") then
                     hasProduct = true
                 end
             end
