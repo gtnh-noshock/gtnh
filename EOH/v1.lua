@@ -188,7 +188,7 @@ colorPrint(GREEN, "参数: 鸿蒙运行时间 = " .. tostring(eohRuntime) .. " �
 local masterSwitchComponent = getComponent("redstone", "")
 local masterSwitch = {
     isOn = function()
-        return masterSwitchComponent.getInput(sides.up) > 0
+        return masterSwitchComponent.getInput(sides.down) > 0
     end,
 }
 
