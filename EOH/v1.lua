@@ -11,8 +11,7 @@ local function startsWith(text, prefix)
 end
 
 local function getTime()
-    local time = os.time() -- 获取当前的时间戳
-    local formattedTime = os.date("%Y-%m-%d %H:%M:%S", time) -- 将时间戳格式化为可读的格式
+    local formattedTime = os.date("%Y-%m-%d %H:%M:%S") -- 将时间戳格式化为可读的格式
     return formattedTime
 end
 
