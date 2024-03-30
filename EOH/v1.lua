@@ -187,10 +187,9 @@ colorPrint(GREEN, "参数: 原料输入时间 = " .. tostring(inputTime) .. " �
 colorPrint(GREEN, "参数: 鸿蒙运行时间 = " .. tostring(eohRuntime) .. " 秒")
 
 local masterSwitchComponent = getComponent("redstone", "")
-local masterSwitchSide = SIDES.north
 local masterSwitch = {
     isOn = function()
-        return masterSwitch.getInput(sides.up) > 0
+        return masterSwitchComponent.getInput(sides.up) > 0
     end,
 }
 
