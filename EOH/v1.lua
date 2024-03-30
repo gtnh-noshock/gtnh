@@ -232,7 +232,7 @@ local function update()
         for i = 0, 10 do
             local item = items[i];
             if not isNullOrEmpty(item) then
-                log(item)
+                printTable(item)
                 if startsWith(item.name, "gregtech:gt.mateitem.01") then
                     hasMaterial = true
                 end
