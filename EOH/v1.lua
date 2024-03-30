@@ -54,6 +54,7 @@ local function getComponent(type, idPrefix)
     local matchedK = nil
     local matchedV = nil
     for k, v in pairs(component.list(t)) do
+        print(v)
         if startsWith(k, idPrefix) then
             matchedK = k
             matchedV = v
