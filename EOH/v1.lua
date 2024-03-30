@@ -10,6 +10,10 @@ local function startsWith(text, prefix)
     return text:find(prefix, 1, true) == 1
 end
 
+local function log(message)
+    print(getTime() .. " " .. message)
+end
+
 local function printTable(table)
     if table == nil then
         print("nil table")
@@ -65,10 +69,6 @@ local function getTime()
     local time = os.time() -- 获取当前的时间戳
     local formattedTime = os.date("%Y-%m-%d %H:%M:%S", time) -- 将时间戳格式化为可读的格式
     return formattedTime
-end
-
-local function log(message)
-    print(getTime() .. " " .. message)
 end
 
 local function findNonEmptyIndex(item_in_box)
