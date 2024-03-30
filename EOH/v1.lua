@@ -232,6 +232,7 @@ local function update()
         for i = 0, 10 do
             local item = items[i];
             if not isNullOrEmpty(item) then
+                log(item)
                 if startsWith(item.name, "gregtech:gt.mateitem.01") then
                     hasMaterial = true
                 end
@@ -240,6 +241,7 @@ local function update()
                 end
             end
         end
+        log("")
 
         if hasMaterial == false or hasProduct == false then
             -- 没有原料
