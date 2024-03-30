@@ -277,7 +277,7 @@ local function update()
             end
         end
 
-        colorPrint(GREEN, "转移完成, 继续等待 AE 推送物品")
+        colorPrint(BLUE, "转移完成, 继续等待 AE 推送物品")
         timeCounter = 0
         setState(States.WAITING_FOR_MATERIALS)
     end
