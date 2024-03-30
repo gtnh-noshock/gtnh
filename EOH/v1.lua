@@ -233,7 +233,7 @@ local function update()
             local item = items[i];
             if not isNullOrEmpty(item) then
                 printTable(item)
-                if startsWith(item.name, "gregtech:gt.mateitem.01") then
+                if startsWith(item.name, "gregtech:gt.metaitem.01") then
                     hasMaterial = true
                 end
                 if startsWith(item.name, "berriespp:Modifier") then
