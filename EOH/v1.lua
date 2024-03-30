@@ -209,6 +209,7 @@ local States = {
 
 local state = States.WAITING_FOR_MATERIALS
 local timeCounter = 0
+local tickDelay = 1 -- seconds
 
 local function setState(newState)
     if state ~= newState then
@@ -247,19 +248,21 @@ local function update()
         end
 
         colorPrint(BLUE, "检测到 AE 原料, 开始等待流体推送")
+
         timeCounter = 0
+        tickDelay = 1
         setState(States.PUSHING_FLUIDS)
     elseif state == States.PUSHING_FLUIDS then
-        timeCounter = timeCounter + 1
         if timeCounter <= inputTime then
             colorPrint(GREEN, "等待流体推送, 倒计时: " .. tostring(inputTime - timeCounter))
             return
         end
         colorPrint(BLUE, "鸿蒙开始工作了, 开始等待 " .. tostring(eohRuntime) .. " 秒")
+
         timeCounter = 0
+        tickDelay = 60
         setState(States.RUNNING)
     elseif state == States.RUNNING then
-        timeCounter = timeCounter + 1
         if timeCounter <= eohRuntime then
             if timeCounter % 60 == 0 then
                 colorPrint(GREEN, "等待鸿蒙工作, 倒计时: " .. tostring(eohRuntime - timeCounter))
@@ -278,7 +281,9 @@ local function update()
         end
 
         colorPrint(BLUE, "转移完成, 继续等待 AE 推送物品")
+
         timeCounter = 0
+        tickDelay = 1
         setState(States.WAITING_FOR_MATERIALS)
     end
 end
@@ -298,5 +303,6 @@ while (true) do
 
     update()
 
-    os.sleep(1) -- 不要修改
+    os.sleep(tickDelay) -- 不要修改
+    timeCounter = timeCounter + tickDelay
 end
