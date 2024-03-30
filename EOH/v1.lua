@@ -254,7 +254,7 @@ local function update()
     elseif state == States.PUSHING_FLUIDS then
         timeCounter = timeCounter + 1
         if timeCounter <= inputTime then
-            colorPrint(GREEN, "等待流体推送, 倒计时: " .. tostring(timeCounter))
+            colorPrint(GREEN, "等待流体推送, 倒计时: " .. tostring(inputTime - timeCounter))
             return
         end
         colorPrint(BLUE, "鸿蒙开始工作了, 开始等待 " .. tostring(eohRuntime) .. " 秒")
@@ -264,7 +264,7 @@ local function update()
         timeCounter = timeCounter + 1
         if timeCounter <= eohRuntime then
             if timeCounter % 60 == 0 then
-                colorPrint(GREEN, "等待鸿蒙工作, 倒计时: " .. timeCounter)
+                colorPrint(GREEN, "等待鸿蒙工作, 倒计时: " .. tostring(eohRuntime - timeCounter))
             end
             return
         end
@@ -275,6 +275,7 @@ local function update()
             local item = items[i];
             if not isNullOrEmpty(item) then
                 input.moveItem(i + 1, output, 1)
+                colorPrint(GREEN, "转移物品: " .. item.label)
             end
         end
 
