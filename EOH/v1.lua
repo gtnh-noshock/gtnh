@@ -48,6 +48,7 @@ local function getComponent(type, idPrefix)
             matchedK = k
             matchedV = v
             matched = matched + 1
+            log("[init] getComponent: match " .. type .. " with prefix '" .. idPrefix .. "', found: " .. k)
         end
     end
     if matched == 1 then
@@ -226,7 +227,7 @@ local function update()
     end
 
     if state == States.WAITING_FOR_MATERIALS then
-        
+
         local hasMaterial = false
         local hasProduct = false
         local items = input.getAllItems()
@@ -241,7 +242,7 @@ local function update()
                 end
             end
         end
-        
+
         if hasMaterial == false or hasProduct == false then
             -- 没有原料
             return
@@ -276,7 +277,7 @@ local function update()
                 input.moveItem(i + 1, output, 1)
             end
         end
-        
+
         timeCounter = 0
         setState(States.WAITING_FOR_MATERIALS)
     end
