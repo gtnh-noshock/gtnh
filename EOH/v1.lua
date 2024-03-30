@@ -240,7 +240,6 @@ local function update()
                 end
             end
         end
-        log("")
 
         if hasMaterial == false or hasProduct == false then
             -- 没有原料
