@@ -30,3 +30,9 @@ rm v1.lua && wget http://e404.top:1111/Turbine/v1.lua && ./v1.lua
 ```shell
 rm v1.lua && wget http://e404.top:1111/PowerBank/v1.lua && ./v1.lua 741 ce8 9f6
 ```
+
+## 鸿蒙之眼
+
+```shell
+rm v1.lua && wget http://e404.top:1111/EOH/v1.lua && ./v1.lua 741 ce8 9f6
+```
