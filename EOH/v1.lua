@@ -95,7 +95,7 @@ local function getTransposerSide(t, side, name)
         side = side,
         moveItem = function(sourceSlot, target, count, targetSlot)
             if count == nil then
-                count = 1
+                count = t.getSlotStackSize(side, sourceSlot)
             end
             --if targetSlot == nil then
             --    targetSlot = findEmptySlot(t.getAllStacks(targetSide).getAll())
@@ -275,7 +275,7 @@ local function update()
         for i = 0, 10 do
             local item = items[i];
             if not isNullOrEmpty(item) then
-                input.moveItem(i + 1, output, 1)
+                input.moveItem(i + 1, output, nil)
                 colorPrint(GREEN, "转移物品: " .. item.label)
             end
         end
