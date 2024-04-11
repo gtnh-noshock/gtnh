@@ -261,6 +261,9 @@ local function update()
 
         timeCounter = 0
         tickDelay = 60
+        if tickDelay > eohRuntime then
+			tickDelay = eohRuntime
+		end
         setState(States.RUNNING)
     elseif state == States.RUNNING then
         if timeCounter <= eohRuntime then
