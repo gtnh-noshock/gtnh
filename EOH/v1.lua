@@ -272,7 +272,7 @@ local function update()
         colorPrint(BLUE, "鸿蒙工作完成, 释放原料和产物")
 
         local items = input.getAllItems()
-        for i = 0, 10 do
+        for i = 0, 107 do
             local item = items[i];
             if not isNullOrEmpty(item) then
                 input.moveItem(i + 1, output, nil)
