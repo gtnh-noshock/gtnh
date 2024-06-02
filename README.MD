@@ -38,5 +38,5 @@ rm v1.lua && wget http://e404.top:1111/EOH/v1.lua && ./v1.lua 40 18010
 ```
 
 ```shell
-rm v2.lua && wget http://e404.top:1111/EOH/v2.lua && ./v2.lua 8 8 18010
+rm v2.lua && wget http://e404.top:1111/EOH/v2.lua && ./v2.lua 80 80 18010
 ```
