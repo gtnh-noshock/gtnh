@@ -259,7 +259,7 @@ local function update()
             else
                 colorPrint(RED, "转移失败, 睡一会")
             end
-            os.sleep(2)
+            os.sleep(3)
         end
 
         colorPrint(GREEN, "开始转移氮气")
@@ -280,7 +280,7 @@ local function update()
             else
                 colorPrint(RED, "转移失败, 睡一会")
             end
-            os.sleep(2)
+            os.sleep(3)
         end
 
         colorPrint(BLUE, "鸿蒙开始工作了, 开始等待 " .. tostring(eohRuntime) .. " 秒")
