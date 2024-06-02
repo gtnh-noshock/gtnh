@@ -183,17 +183,17 @@ end
 
 local args = { ... }
 if #args < 2 then
-    print("参数错误, ./v1.lua <氢气数量 M> <氮气数量 M> <鸿蒙运行时间 秒>")
+    print("参数错误, ./v1.lua <氢气数量 G> <氦气数量 G> <鸿蒙运行时间 秒>")
     exit(0)
 end
 
-local hydrogenAmount = tonumber(args[1])
-local nitrogenAmount = tonumber(args[2])
+local hAmount = tonumber(args[1])
+local nAmount = tonumber(args[2])
 local transferAmount = 0.5 -- G
 --local transferAmount = tonumber(args[3])
 local eohRuntime = tonumber(args[3])
-colorPrint(GREEN, "参数: 氢气数量 = " .. tostring(hydrogenAmount) .. " G")
-colorPrint(GREEN, "参数: 氮气数量 = " .. tostring(nitrogenAmount) .. " G")
+colorPrint(GREEN, "参数: 氢气数量 = " .. tostring(hAmount) .. " G")
+colorPrint(GREEN, "参数: 氦气数量 = " .. tostring(nAmount) .. " G")
 --colorPrint(GREEN, "参数: 每次转运数量 = " .. tostring(transferAmount) .. " G")
 colorPrint(GREEN, "参数: 鸿蒙运行时间 = " .. tostring(eohRuntime) .. " 秒")
 
@@ -243,8 +243,8 @@ local function update()
     if state == States.PUSHING_FLUIDS then
         colorPrint(GREEN, "开始转移氢气")
         local pushedH = 0
-        while hydrogenAmount - pushedH > 1e-6 do
-            local remainingToPush = hydrogenAmount - pushedH;
+        while hAmount - pushedH > 1e-6 do
+            local remainingToPush = hAmount - pushedH;
 
             local thisTimePush = transferAmount;
             if remainingToPush < transferAmount then
@@ -262,10 +262,10 @@ local function update()
             os.sleep(4)
         end
 
-        colorPrint(GREEN, "开始转移氮气")
+        colorPrint(GREEN, "开始转移氦气")
         local pushedN = 0
-        while nitrogenAmount - pushedN > 1e-6 do
-            local remainingToPush = nitrogenAmount - pushedN;
+        while nAmount - pushedN > 1e-6 do
+            local remainingToPush = nAmount - pushedN;
 
             local thisTimePush = transferAmount;
             if remainingToPush < transferAmount then
