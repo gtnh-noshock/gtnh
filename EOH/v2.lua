@@ -249,7 +249,6 @@ local function update()
                 thisTimePush = remainingToPush;
             end
 
-            os.sleep(0.01)
             colorPrint(GREEN, "请求转移 " .. tostring(thisTimePush) .. " G, 总共还缺少 " .. tostring(remainingToPush) .. " G")
             local success, transferred = inputH.transferFluid(outputSide, thisTimePush * 1000000)
             if success then
@@ -271,11 +270,10 @@ local function update()
                 thisTimePush = remainingToPush;
             end
 
-            os.sleep(0.01)
             colorPrint(GREEN, "请求转移 " .. tostring(thisTimePush) .. " G, 总共还缺少 " .. tostring(remainingToPush) .. " G")
-            local success, transferred = inputN.transferFluid(outputSide, thisTimePush * 1000000000)
+            local success, transferred = inputN.transferFluid(outputSide, thisTimePush * 1000000)
             if success then
-                pushedN = pushedN + transferred / 1000000000;
+                pushedN = pushedN + transferred / 1000000;
                 colorPrint(GREEN, "转移氮气: " .. tostring(transferred) .. " G")
             else
                 colorPrint(RED, "转移氮气失败")
