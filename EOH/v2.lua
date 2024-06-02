@@ -240,8 +240,8 @@ local function update()
 
     if state == States.PUSHING_FLUIDS then
         local pushedH = 0
-        while pushedH < inputH do
-            local remainingToPush = inputH - pushedH;
+        while pushedH < hydrogenAmount do
+            local remainingToPush = hydrogenAmount - pushedH;
 
             local thisTimePush = transferAmount;
             if remainingToPush < transferAmount then
@@ -260,8 +260,8 @@ local function update()
         end
 
         local pushedN = 0
-        while pushedN < inputN do
-            local remainingToPush = inputN - pushedN;
+        while pushedN < nitrogenAmount do
+            local remainingToPush = nitrogenAmount - pushedN;
 
             local thisTimePush = transferAmount;
             if remainingToPush < transferAmount then
