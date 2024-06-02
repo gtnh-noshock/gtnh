@@ -239,6 +239,7 @@ local function update()
     end
 
     if state == States.PUSHING_FLUIDS then
+        colorPrint(GREEN, "开始转移氢气")
         local pushedH = 0
         while pushedH < hydrogenAmount do
             local remainingToPush = hydrogenAmount - pushedH;
@@ -249,6 +250,7 @@ local function update()
             end
 
             os.sleep(0.01)
+            colorPrint(GREEN, "请求转移 " .. tostring(thisTimePush) .. " G, 总共还缺少 " .. tostring(remainingToPush) .. " G")
             local success, transferred = inputH.transferFluid(outputSide, thisTimePush * 1000000000)
             if success then
                 pushedH = pushedH + transferred / 1000000000;
@@ -259,6 +261,7 @@ local function update()
             end
         end
 
+        colorPrint(GREEN, "开始转移氮气")
         local pushedN = 0
         while pushedN < nitrogenAmount do
             local remainingToPush = nitrogenAmount - pushedN;
@@ -269,6 +272,7 @@ local function update()
             end
 
             os.sleep(0.01)
+            colorPrint(GREEN, "transferring")
             local success, transferred = inputN.transferFluid(outputSide, thisTimePush * 1000000000)
             if success then
                 pushedN = pushedN + transferred / 1000000000;
