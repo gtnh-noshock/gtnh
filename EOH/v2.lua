@@ -272,7 +272,7 @@ local function update()
             end
 
             os.sleep(0.01)
-            colorPrint(GREEN, "transferring")
+            colorPrint(GREEN, "请求转移 " .. tostring(thisTimePush) .. " G, 总共还缺少 " .. tostring(remainingToPush) .. " G")
             local success, transferred = inputN.transferFluid(outputSide, thisTimePush * 1000000000)
             if success then
                 pushedN = pushedN + transferred / 1000000000;
