@@ -70,6 +70,29 @@ local function getComponent(type, idPrefix)
     end
 end
 
+local function getComponentOrNil(type, idPrefix)
+    -- Get component
+    local matched = 0
+    local matchedK = nil
+    local matchedV = nil
+    for k, v in pairs(component.list(t)) do
+        if v == type and startsWith(k, idPrefix) then
+            matchedK = k
+            matchedV = v
+            matched = matched + 1
+            log("[init] getComponent: match " .. type .. " with prefix '" .. idPrefix .. "', found: " .. k)
+        end
+    end
+    if matched == 1 then
+        return component.proxy(matchedK, matchedV)
+    end
+    if matched > 1 then
+        error("duplicate match for " .. type .. " with prefix " .. idPrefix)
+    else
+        return nil
+    end
+end
+
 local function findNonEmptyIndex(item_in_box)
 
     local boxLocation = 0
@@ -197,9 +220,12 @@ colorPrint(GREEN, "参数: 氦气数量 = " .. tostring(nAmount) .. " G")
 --colorPrint(GREEN, "参数: 每次转运数量 = " .. tostring(transferAmount) .. " G")
 colorPrint(GREEN, "参数: 鸿蒙运行时间 = " .. tostring(eohRuntime) .. " 秒")
 
-local masterSwitchComponent = getComponent("redstone", "")
+local masterSwitchComponent = getComponentOrNil("redstone", "")
 local masterSwitch = {
     isOn = function()
+        if masterSwitchComponent == nil then
+            return true
+        end
         return masterSwitchComponent.getInput(sides.down) > 0
     end,
 }
