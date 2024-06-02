@@ -189,7 +189,7 @@ end
 
 local hydrogenAmount = tonumber(args[1])
 local nitrogenAmount = tonumber(args[2])
-local transferAmount = 1 -- G
+local transferAmount = 0.25 -- G
 --local transferAmount = tonumber(args[3])
 local eohRuntime = tonumber(args[3])
 colorPrint(GREEN, "参数: 氢气数量 = " .. tostring(hydrogenAmount) .. " G")
@@ -253,13 +253,13 @@ local function update()
 
             colorPrint(GREEN, "请求转移 " .. tostring(thisTimePush) .. " G, 总共还缺少 " .. tostring(remainingToPush) .. " G")
             local success, transferred = inputH.transferFluid(outputSide, thisTimePush * ONE_G)
-            os.sleep(2)
             if success then
                 pushedH = pushedH + transferred / ONE_G;
                 colorPrint(GREEN, "转移: " .. tostring(transferred / ONE_G) .. " G")
             else
                 colorPrint(RED, "转移失败, 睡一会")
             end
+            os.sleep(2)
         end
 
         colorPrint(GREEN, "开始转移氮气")
@@ -274,13 +274,13 @@ local function update()
 
             colorPrint(GREEN, "请求转移 " .. tostring(thisTimePush) .. " G, 总共还缺少 " .. tostring(remainingToPush) .. " G")
             local success, transferred = inputN.transferFluid(outputSide, thisTimePush * ONE_G)
-            os.sleep(2)
             if success then
                 pushedN = pushedN + transferred / ONE_G;
                 colorPrint(GREEN, "转移成功: " .. tostring(transferred / ONE_G) .. " G")
             else
                 colorPrint(RED, "转移失败, 睡一会")
             end
+            os.sleep(2)
         end
 
         colorPrint(BLUE, "鸿蒙开始工作了, 开始等待 " .. tostring(eohRuntime) .. " 秒")
