@@ -258,7 +258,6 @@ local function update()
                 colorPrint(GREEN, "转移氢气: " .. tostring(transferred) .. " G")
             else
                 colorPrint(RED, "转移氢气失败")
-                break
             end
         end
 
@@ -279,7 +278,6 @@ local function update()
                 colorPrint(GREEN, "转移氮气: " .. tostring(transferred) .. " G")
             else
                 colorPrint(RED, "转移氮气失败")
-                break
             end
         end
 
