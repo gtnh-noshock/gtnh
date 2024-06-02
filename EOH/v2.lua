@@ -255,9 +255,10 @@ local function update()
             local success, transferred = inputH.transferFluid(outputSide, thisTimePush * ONE_G)
             if success then
                 pushedH = pushedH + transferred / ONE_G;
-                colorPrint(GREEN, "转移氢气: " .. tostring(transferred) .. " G")
+                colorPrint(GREEN, "转移: " .. tostring(transferred) .. " G")
             else
-                colorPrint(RED, "转移氢气失败")
+                colorPrint(RED, "转移失败, 睡一会")
+                os.sleep(0.1)
             end
         end
 
@@ -275,9 +276,10 @@ local function update()
             local success, transferred = inputN.transferFluid(outputSide, thisTimePush * ONE_G)
             if success then
                 pushedN = pushedN + transferred / ONE_G;
-                colorPrint(GREEN, "转移氮气: " .. tostring(transferred) .. " G")
+                colorPrint(GREEN, "转移: " .. tostring(transferred) .. " G")
             else
-                colorPrint(RED, "转移氮气失败")
+                colorPrint(RED, "转移失败, 睡一会")
+                os.sleep(0.1)
             end
         end
 
