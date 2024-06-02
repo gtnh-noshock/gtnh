@@ -189,7 +189,7 @@ end
 
 local hydrogenAmount = tonumber(args[1])
 local nitrogenAmount = tonumber(args[2])
-local transferAmount = 0.5 -- G
+local transferAmount = 2 -- G
 --local transferAmount = tonumber(args[3])
 local eohRuntime = tonumber(args[3])
 colorPrint(GREEN, "参数: 氢气数量 = " .. tostring(hydrogenAmount) .. " G")
