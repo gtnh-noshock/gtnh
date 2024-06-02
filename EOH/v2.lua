@@ -253,12 +253,12 @@ local function update()
 
             colorPrint(GREEN, "请求转移 " .. tostring(thisTimePush) .. " G, 总共还缺少 " .. tostring(remainingToPush) .. " G")
             local success, transferred = inputH.transferFluid(outputSide, thisTimePush * ONE_G)
+            os.sleep(2)
             if success then
                 pushedH = pushedH + transferred / ONE_G;
-                colorPrint(GREEN, "转移: " .. tostring(transferred) .. " G")
+                colorPrint(GREEN, "转移: " .. tostring(transferred / ONE_G) .. " G")
             else
                 colorPrint(RED, "转移失败, 睡一会")
-                os.sleep(1)
             end
         end
 
@@ -274,12 +274,12 @@ local function update()
 
             colorPrint(GREEN, "请求转移 " .. tostring(thisTimePush) .. " G, 总共还缺少 " .. tostring(remainingToPush) .. " G")
             local success, transferred = inputN.transferFluid(outputSide, thisTimePush * ONE_G)
+            os.sleep(2)
             if success then
                 pushedN = pushedN + transferred / ONE_G;
-                colorPrint(GREEN, "转移成功: " .. tostring(transferred) .. " G")
+                colorPrint(GREEN, "转移成功: " .. tostring(transferred / ONE_G) .. " G")
             else
                 colorPrint(RED, "转移失败, 睡一会")
-                os.sleep(1)
             end
         end
 
